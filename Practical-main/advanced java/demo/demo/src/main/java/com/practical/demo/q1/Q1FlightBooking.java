@@ -11,10 +11,10 @@ import java.util.Scanner;
 public class Q1FlightBooking {
 
     // Database credentials
-    static final String DB_URL = "jdbc:mysql://localhost:3306/";
+    static final String DB_URL = "jdbc:mysql://localhost:3000/";
     static final String DB_NAME = "airlinedb";
     static final String USER = "root";
-    static final String PASS = "dhruv2311";
+    static final String PASS = "Nehil@123";
 
     public static void main(String[] args) {
         setupDatabase();
