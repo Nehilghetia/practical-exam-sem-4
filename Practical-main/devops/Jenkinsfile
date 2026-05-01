@@ -1,0 +1,51 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Build') {
+            steps {
+                // Navigate to the "practical" directory where the pom.xml is located
+                dir('practical') {
+                    script {
+                        // Check if the Jenkins agent is Unix-based (Linux/Mac) or Windows
+                        if (isUnix()) {
+                    
+                            sh 'chmod +x mvnw'
+                            sh './mvnw clean compile'
+                        } else {
+                            bat 'mvnw.cmd clean compile'
+                        }
+                    }
+                }
+            }
+        }
+        
+        stage('Test') {
+            steps {
+                dir('practical') {
+                    script {
+                        if (isUnix()) {
+                            sh './mvnw test'
+                        } else {
+                            bat 'mvnw.cmd test'
+                        }
+                    }
+                }
+            }
+        }
+        
+        stage('Package') {
+            steps {
+                dir('practical') {
+                    script {
+                        if (isUnix()) {
+                            sh './mvnw package -DskipTests'
+                        } else {
+                            bat 'mvnw.cmd package -DskipTests'
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
